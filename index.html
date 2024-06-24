@@ -25,7 +25,6 @@
   <h1>Clicker Bot</h1>
   <p id="points">Баллы: 0</p>
   <button id="clickButton">Click me!</button>
-  <button id="connectWallet">Подключить кошелек</button>
 
   <script>
     const tg = window.Telegram.WebApp;
@@ -44,21 +43,6 @@
       .then(data => {
         console.log('Received response:', data);
         document.getElementById('points').innerText = `Баллы: ${data.points}`;
-      })
-      .catch(error => console.error('Error:', error));
-    });
-
-    document.getElementById('connectWallet').addEventListener('click', () => {
-      console.log('Connect wallet button pressed');
-      fetch('http://localhost:3000/api/connect_wallet', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chatId })
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Received response:', data);
-        alert(data.message);
       })
       .catch(error => console.error('Error:', error));
     });
