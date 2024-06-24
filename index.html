@@ -35,7 +35,7 @@
 
     document.getElementById('clickButton').addEventListener('click', () => {
       console.log('Click button pressed');
-      fetch('https://your-server.com/api/click', {
+      fetch('http://localhost:3000/api/click', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chatId })
@@ -50,7 +50,7 @@
 
     document.getElementById('connectWallet').addEventListener('click', () => {
       console.log('Connect wallet button pressed');
-      fetch('https://your-server.com/api/connect_wallet', {
+      fetch('http://localhost:3000/api/connect_wallet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chatId })
