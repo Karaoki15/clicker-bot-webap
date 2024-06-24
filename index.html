@@ -34,6 +34,7 @@
     const chatId = tg.initDataUnsafe.user.id;
 
     document.getElementById('clickButton').addEventListener('click', () => {
+      console.log('Click button pressed');
       fetch('https://your-server.com/api/click', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -41,11 +42,14 @@
       })
       .then(response => response.json())
       .then(data => {
+        console.log('Received response:', data);
         document.getElementById('points').innerText = `Баллы: ${data.points}`;
-      });
+      })
+      .catch(error => console.error('Error:', error));
     });
 
     document.getElementById('connectWallet').addEventListener('click', () => {
+      console.log('Connect wallet button pressed');
       fetch('https://your-server.com/api/connect_wallet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -53,8 +57,10 @@
       })
       .then(response => response.json())
       .then(data => {
+        console.log('Received response:', data);
         alert(data.message);
-      });
+      })
+      .catch(error => console.error('Error:', error));
     });
   </script>
 </body>
