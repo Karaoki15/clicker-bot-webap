@@ -5,34 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clicker Bot</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #f0f0f0;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      margin: 5px;
-    }
-    #log {
-      width: 80%;
-      max-height: 200px;
-      overflow-y: auto;
-      background: #e0e0e0;
-      padding: 10px;
-      margin-top: 20px;
-      border: 1px solid #ccc;
-    }
+    body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #f0f0f0; }
+    button { padding: 10px 20px; font-size: 16px; margin: 5px; }
+    #log { width: 80%; max-height: 200px; overflow-y: auto; background: #e0e0e0; padding: 10px; margin-top: 20px; border: 1px solid #ccc; }
   </style>
 </head>
 <body>
   <h1>Clicker Bot</h1>
-  <p id="points">Баллы: 0</p>
+  <p id="points">Points: 0</p>
   <button id="clickButton">Click me!</button>
   <div id="log"></div>
 
@@ -46,7 +26,7 @@
     };
 
     const chatId = tg.initDataUnsafe.user.id;
-    log('Telegram WebApp API доступен');
+    log('Telegram WebApp API available');
     log(`Chat ID: ${chatId}`);
 
     document.getElementById('clickButton').addEventListener('click', () => {
@@ -56,13 +36,10 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chatId })
       })
-      .then(response => {
-        log(`Response status: ${response.status}`);
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         log(`Received response: ${JSON.stringify(data)}`);
-        document.getElementById('points').innerText = `Баллы: ${data.points}`;
+        document.getElementById('points').innerText = `Points: ${data.points}`;
       })
       .catch(error => log(`Error: ${error}`));
     });
