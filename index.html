@@ -28,20 +28,33 @@
   <button id="connectWallet">Подключить кошелек</button>
 
   <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+
+    const chatId = tg.initDataUnsafe?.user?.id;
+
     document.getElementById('clickButton').addEventListener('click', () => {
-      fetch('/api/click', { method: 'POST' })
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById('points').innerText = `Баллы: ${data.points}`;
-        });
+      fetch('/api/click', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chatId })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('points').innerText = `Баллы: ${data.points}`;
+      });
     });
 
     document.getElementById('connectWallet').addEventListener('click', () => {
-      fetch('/api/connect_wallet', { method: 'POST' })
-        .then(response => response.json())
-        .then(data => {
-          alert(data.message);
-        });
+      fetch('/api/connect_wallet', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chatId })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message);
+      });
     });
   </script>
 </body>
